@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "794393783587",
+    "project_id": "sparsh-3bee7",
+    "storage_bucket": "sparsh-3bee7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794393783587:android:9def5cefc971980642f096",
+        "android_client_info": {
+          "package_name": "com.example.sparsh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3WpYWoG6gms0Q8G9NIl0c849sgjHM8ZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
