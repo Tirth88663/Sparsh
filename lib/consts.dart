@@ -8,3 +8,7 @@ const secondaryColor = Color(0xFFfee0b9);
 const secondaryFgColor = Color(0xFF140c00);
 const accentColor = Color(0xFFe78404);
 const accentFgColor = Color(0xFF140c00);
+
+const blue = Color(0xff14213D);
+const grey = Color(0xffE5E5E5);
+const orange = Color(0xffFCA311);

@@ -1,15 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sparsh/pages/emailVerificationPage.dart';
-import 'package:sparsh/pages/forgotPasswordPage.dart';
-import 'package:sparsh/pages/homePage.dart';
-import 'package:sparsh/pages/landingPage.dart';
-import 'package:sparsh/pages/loginPage.dart';
-import 'package:sparsh/pages/signupPage.dart';
-import 'package:sparsh/pages/splashPage.dart';
+import 'package:sparsh/email_verification/ui/emailVerificationPage.dart';
+import 'package:sparsh/forgot_password/ui/forgotPasswordPage.dart';
+import 'package:sparsh/home/ui/homePage.dart';
+import 'package:sparsh/landing/ui/landingPage.dart';
+import 'package:sparsh/signup/ui/signupPage.dart';
+import 'package:sparsh/splashScreen/ui/splashPage.dart';
 
 import 'consts.dart';
+import 'login/ui/loginPage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,30 +33,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sparsh',
-      theme: ThemeData(
-        fontFamily: GoogleFonts.lato().fontFamily,
-        colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          background: backgroundColor,
-          onBackground: textColor,
-          primary: primaryColor,
-          onPrimary: primaryFgColor,
-          secondary: secondaryColor,
-          onSecondary: secondaryFgColor,
-          tertiary: accentColor,
-          onTertiary: accentFgColor,
-          surface: backgroundColor,
-          onSurface: textColor,
-          error: Brightness.light == Brightness.light
-              ? Color(0xffB3261E)
-              : Color(0xffF2B8B5),
-          onError: Brightness.light == Brightness.light
-              ? Color(0xffFFFFFF)
-              : Color(0xff601410),
-        ),
-        appBarTheme: const AppBarTheme(elevation: 0),
-        useMaterial3: true,
-      ),
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          appBarTheme: const AppBarTheme(elevation: 0),
+          useMaterial3: true,
+          bottomSheetTheme: const BottomSheetThemeData(
+            backgroundColor: grey,
+          )),
       initialRoute: "/",
       routes: {
         '/': (context) => const SplashPage(),
