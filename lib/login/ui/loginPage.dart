@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sparsh/email_verification/ui/emailVerificationPage.dart';
+import 'package:sparsh/login/bloc/login_bloc.dart';
 
 import '../../../consts.dart';
 
@@ -20,6 +22,13 @@ class _LoginPageState extends State<LoginPage> {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  LoginBloc loginBloc = LoginBloc();
+  @override
+  void initState() {
+    loginBloc.add(LoginInitialEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,183 +141,216 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: blue,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
-      bottomSheet: SizedBox(
-        height: width * 1.2,
-        width: width,
-        child: Form(
-          key: _loginformkey,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: width * 0.06,
-              left: width * 0.06,
-              right: width * 0.06,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                emailField,
-                SizedBox(height: width * 0.04),
-                passwordField,
-                SizedBox(height: width * 0.1),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                      child: Text(
-                        "Forgot Password?",
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: blue,
-                          ),
-                        ),
-                      ),
-                      onPressed: () => Navigator.pushNamed(context, '/forgot'),
-                    ),
-                    userLoginButton,
-                  ],
-                ),
-                SizedBox(
-                  height: width * 0.04,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      child: Text("Signup",
-                          style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: blue,
-                            ),
-                          )),
-                      onPressed: () => Navigator.pushNamed(context, '/signup'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-              child: Column(
-                children: [
-                  //Title/Heading
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width * 0.15,
-                      vertical: width * 0.2,
-                    ),
-                    child: Center(
-                        child:
-                            Image.asset("assets/logo-white-no-background.png")),
-                  ),
-
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     color: Theme.of(context).colorScheme.background,
-                  //     borderRadius: const BorderRadius.all(
-                  //       Radius.circular(20),
-                  //     ),
-                  //   ),
-                  //   padding: EdgeInsets.symmetric(
-                  //     vertical: width * 0.05,
-                  //     horizontal: width * 0.05,
-                  //   ),
-                  //   child: Form(
-                  //     key: _loginformkey,
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.center,
-                  //       children: [
-                  //         emailField,
-                  //         SizedBox(height: width * 0.04),
-                  //         passwordField,
-                  //         SizedBox(height: width * 0.1),
-                  //         Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //           children: [
-                  //             TextButton(
-                  //               child: Text(
-                  //                 "Forgot Password?",
-                  //                 style: GoogleFonts.poppins(
-                  //                   textStyle: TextStyle(
-                  //                     fontWeight: FontWeight.w500,
-                  //                     fontSize: 16,
-                  //                     color:
-                  //                         Theme.of(context).colorScheme.primary,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               onPressed: () =>
-                  //                   Navigator.pushNamed(context, '/forgot'),
-                  //             ),
-                  //             userLoginButton,
-                  //           ],
-                  //         ),
-                  //         SizedBox(
-                  //           height: width * 0.04,
-                  //         ),
-                  //         Row(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: [
-                  //             Text(
-                  //               "Don't have an account?",
-                  //               style: GoogleFonts.poppins(
-                  //                 textStyle: const TextStyle(
-                  //                   fontWeight: FontWeight.w500,
-                  //                   fontSize: 16,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //             TextButton(
-                  //               child: Text("Signup",
-                  //                   style: GoogleFonts.poppins(
-                  //                     textStyle: TextStyle(
-                  //                       fontWeight: FontWeight.w500,
-                  //                       fontSize: 16,
-                  //                       color: Theme.of(context)
-                  //                           .colorScheme
-                  //                           .primary,
-                  //                     ),
-                  //                   )),
-                  //               onPressed: () =>
-                  //                   Navigator.pushNamed(context, '/signup'),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+    return BlocConsumer<LoginBloc, LoginState>(
+      bloc: loginBloc,
+      listenWhen: (previous, current) => current is LoginActionState,
+      buildWhen: (previous, current) => current is! LoginActionState,
+      listener: (context, state) {
+        switch (state.runtimeType) {
+          case LoginNavToEmailVerificationActionState:
+            Navigator.pushNamed(context, "/email");
+            break;
+          case LoginNavToPasswordResetActionState:
+            Navigator.pushNamed(context, "/forgot");
+            break;
+          case LoginNavToSignupActionState:
+            Navigator.pushReplacementNamed(context, "/signup");
+            break;
+          default:
+            break;
+        }
+      },
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case LoginInitial:
+            return Scaffold(
+              extendBodyBehindAppBar: true,
+              backgroundColor: blue,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
               ),
-            ),
-          ),
-        ),
-      ),
+              // bottomSheet: SizedBox(
+              //   height: width * 1.2,
+              //   width: width,
+              //   child: Form(
+              //     key: _loginformkey,
+              //     child: Padding(
+              //       padding: EdgeInsets.only(
+              //         top: width * 0.06,
+              //         left: width * 0.06,
+              //         right: width * 0.06,
+              //       ),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.center,
+              //         children: [
+              //           emailField,
+              //           SizedBox(height: width * 0.04),
+              //           passwordField,
+              //           SizedBox(height: width * 0.1),
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //             children: [
+              //               TextButton(
+              //                 child: Text(
+              //                   "Forgot Password?",
+              //                   style: GoogleFonts.poppins(
+              //                     textStyle: const TextStyle(
+              //                       fontWeight: FontWeight.w700,
+              //                       fontSize: 16,
+              //                       color: blue,
+              //                     ),
+              //                   ),
+              //                 ),
+              //                 onPressed: () =>
+              //                     loginBloc.add(LoginPasswordForgotEvent()),
+              //               ),
+              //               userLoginButton,
+              //             ],
+              //           ),
+              //           SizedBox(
+              //             height: width * 0.04,
+              //           ),
+              //           Row(
+              //             mainAxisAlignment: MainAxisAlignment.center,
+              //             children: [
+              //               Text(
+              //                 "Don't have an account?",
+              //                 style: GoogleFonts.poppins(
+              //                   textStyle: const TextStyle(
+              //                     fontWeight: FontWeight.w500,
+              //                     fontSize: 16,
+              //                   ),
+              //                 ),
+              //               ),
+              //               TextButton(
+              //                 child: Text("Signup",
+              //                     style: GoogleFonts.poppins(
+              //                       textStyle: const TextStyle(
+              //                         fontWeight: FontWeight.w700,
+              //                         fontSize: 16,
+              //                         color: blue,
+              //                       ),
+              //                     )),
+              //                 onPressed: () =>
+              //                     loginBloc.add(SignupButtonClickedEvent()),
+              //               ),
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Center(
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          //Title/Heading
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.15,
+                              vertical: width * 0.2,
+                            ),
+                            child: Center(
+                                child: Image.asset(
+                                    "assets/logo-white-no-background.png")),
+                          ),
+                          Container(
+                            height: width * 1.2,
+                            width: width,
+                            decoration: const BoxDecoration(
+                              color: grey,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
+                              ),
+                            ),
+                            child: Form(
+                              key: _loginformkey,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: width * 0.08,
+                                  left: width * 0.06,
+                                  right: width * 0.06,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    emailField,
+                                    SizedBox(height: width * 0.04),
+                                    passwordField,
+                                    SizedBox(height: width * 0.1),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        TextButton(
+                                          child: Text(
+                                            "Forgot Password?",
+                                            style: GoogleFonts.poppins(
+                                              textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16,
+                                                color: blue,
+                                              ),
+                                            ),
+                                          ),
+                                          onPressed: () => loginBloc
+                                              .add(LoginPasswordForgotEvent()),
+                                        ),
+                                        userLoginButton,
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: width * 0.04,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Don't have an account?",
+                                          style: GoogleFonts.poppins(
+                                            textStyle: const TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          child: Text("Signup",
+                                              style: GoogleFonts.poppins(
+                                                textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 16,
+                                                  color: blue,
+                                                ),
+                                              )),
+                                          onPressed: () => loginBloc
+                                              .add(SignupButtonClickedEvent()),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          default:
+            return const SizedBox();
+        }
+      },
     );
   }
 
@@ -318,11 +360,7 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
                 Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const EmailVerificationPage(),
-                  ),
-                ),
+                loginBloc.add(LoginButtonClickedEvent()),
               })
           .catchError((e) {
         Fluttertoast.showToast(msg: e!.message);

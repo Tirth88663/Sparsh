@@ -10,6 +10,11 @@ class EmailVerificationPage extends StatefulWidget {
 class _EmailVerificationPageState extends State<EmailVerificationPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(),
+      body: const Center(
+        child: Text("Email Verification"),
+      ),
+    );
   }
 }
