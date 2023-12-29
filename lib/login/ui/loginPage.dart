@@ -47,8 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           return ("Please Enter Valid Email");
         }
         //reg expression for validation of domain
-        if (!RegExp("\b*@sunpharma.com\$", caseSensitive: true)
-            .hasMatch(value)) {
+        if (!RegExp("\b*.com\$", caseSensitive: true).hasMatch(value)) {
           return ("Enter Valid Email");
         }
         return null;

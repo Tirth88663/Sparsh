@@ -38,10 +38,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var iconLeftPadding = width * 0.3;
-    var iconRightPadding = width * 0.3;
-    var iconTopPadding = width * 0.32;
-    var iconBottomPadding = width * 0.0;
 
     return BlocConsumer<SplashBloc, SplashState>(
       bloc: splashBloc,
@@ -51,7 +47,7 @@ class _SplashPageState extends State<SplashPage> {
         if (state is SplashNavToLandingPageActionState) {
           Navigator.of(context).pushReplacementNamed("/landing");
         } else if (state is SplashNavToHomeActionState) {
-          Navigator.pushReplacementNamed(context, "/home");
+          Navigator.pushReplacementNamed(context, "/email");
         }
       },
       builder: (context, state) {

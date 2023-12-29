@@ -28,8 +28,9 @@ class _SignupPageState extends State<SignupPage> {
   final _auth = FirebaseAuth.instance;
 
   final _signupformKey = GlobalKey<FormState>();
-  final nameEditingController = TextEditingController();
-  final mobileNumberEditingController = TextEditingController();
+  final TextEditingController nameEditingController = TextEditingController();
+  final TextEditingController mobileNumberEditingController =
+      TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController reEnterPasswordController =
@@ -129,8 +130,7 @@ class _SignupPageState extends State<SignupPage> {
           return ("Please Enter Valid Email");
         }
         //reg expression for validation of domain
-        if (!RegExp("\b*@sunpharma.com\$", caseSensitive: true)
-            .hasMatch(value)) {
+        if (!RegExp("\b*.com\$", caseSensitive: true).hasMatch(value)) {
           return ("Enter Valid Email");
         }
         return null;
@@ -396,8 +396,10 @@ class _SignupPageState extends State<SignupPage> {
 
     UserModel userModel = UserModel();
 
+    userModel.name = nameEditingController.text;
     userModel.email = user!.email;
     userModel.uid = user.uid;
+    userModel.mobile = mobileNumberEditingController.text;
 
     await firebaseFirestore
         .collection("users")
