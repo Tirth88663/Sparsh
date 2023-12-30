@@ -95,7 +95,7 @@ class _SignupPageState extends State<SignupPage> {
       onSaved: (value) {
         mobileNumberEditingController.text = value!;
       },
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       cursorColor: blue,
       decoration: InputDecoration(
         labelText: 'Mobile Number',
@@ -178,7 +178,7 @@ class _SignupPageState extends State<SignupPage> {
         _signupformKey.currentState!.validate();
         passwordController.text = value!;
       },
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
       cursorColor: blue,
       decoration: InputDecoration(
         labelText: 'Password',
@@ -216,7 +216,7 @@ class _SignupPageState extends State<SignupPage> {
         _signupformKey.currentState!.validate();
         reEnterPasswordController.text = value!;
       },
-      textInputAction: TextInputAction.done,
+      textInputAction: TextInputAction.next,
       cursorColor: blue,
       decoration: InputDecoration(
         labelText: 'Re-Enter Password',

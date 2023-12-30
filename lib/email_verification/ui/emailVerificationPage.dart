@@ -80,7 +80,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
           current is! EmailVerificationActionState,
       listener: (context, state) {
         if (state is EmailVerificationDoneActionState) {
-          Navigator.pushReplacementNamed(context, "/home");
+          Navigator.pushNamedAndRemoveUntil(context, "/home", (_) => false);
         } else if (state is EmailVerificationNavToLandingScreenActionState) {
           Navigator.pushReplacementNamed(context, "/landing");
         }
